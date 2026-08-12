@@ -1,0 +1,23 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Documentos generados
+filled_template.docx
+pruebaa_unir.docx
+*_unido.docx
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
