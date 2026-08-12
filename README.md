@@ -1,9 +1,10 @@
 # 📄 Herramientas de Documentos
 
-Aplicación de escritorio para **automatizar el trabajo con documentos de Word (.docx)**. Integra dos utilidades en una sola interfaz limpia con pestañas:
+Aplicación de escritorio para **automatizar el trabajo con documentos de Word (.docx)**. Integra tres utilidades en una sola interfaz limpia con pestañas:
 
 - **📝 Reemplazar Variables** — Rellena plantillas reemplazando variables por valores definidos.
 - **📄 Unir Documentos** — Combina varios documentos Word en uno solo, respetando el orden indicado.
+- **📊 Excel → Word** — Genera uno o varios documentos Word a partir de un archivo Excel y una plantilla.
 
 Construida con **Python + CustomTkinter**.
 
@@ -23,6 +24,13 @@ Construida con **Python + CustomTkinter**.
 - Indica la ruta de salida y genera el documento combinado con **`docxcompose`**.
 - La unión corre en segundo plano con **indicador de progreso**, sin bloquear la interfaz.
 - El botón "Unir" se **deshabilita** automáticamente cuando la lista está vacía.
+
+### 📊 Excel → Word
+- Selecciona un archivo Excel, una plantilla `.docx` y una carpeta de salida.
+- Cada fila del Excel se usa como datos para generar un documento Word con la plantilla (un documento por fila).
+- Basado en **`pandas`** y **`docxtpl`** (`excelOperaciones.generar_documentos`).
+- La generación corre en segundo plano con **indicador de progreso**, sin bloquear la interfaz.
+- El botón "Generar" se **deshabilita** automáticamente hasta que se seleccionen los tres archivos.
 
 ### 🎨 General
 - Interfaz en pestañas con tema claro/oscuro automático (`System`).
@@ -70,6 +78,7 @@ python app.py
 | `docxtpl`        | Reemplazo de variables en plantillas   |
 | `docxcompose`    | Unión de documentos Word               |
 | `python-docx`    | Lectura de documentos `.docx`          |
+| `pandas`         | Lectura de archivos Excel              |
 
 ---
 
@@ -79,10 +88,12 @@ python app.py
 .
 ├── app.py                    # Punto de entrada: ventana principal + pestañas
 ├── wordOperaciones.py        # Lógica de negocio (reemplazo y unión)
+├── excelOperaciones.py       # Lógica de negocio (Excel → Word)
 ├── tabs/
 │   ├── __init__.py
 │   ├── tab_reemplazar.py     # Pestaña "Reemplazar Variables"
-│   └── tab_unir.py           # Pestaña "Unir Documentos"
+│   ├── tab_unir.py           # Pestaña "Unir Documentos"
+│   └── tab_excel_word.py     # Pestaña "Excel → Word"
 ├── requirements.txt
 └── README.md
 ```
@@ -105,6 +116,15 @@ python app.py
 2. Pulsa **＋ Agregar documentos** y selecciona uno o varios `.docx`.
 3. Ordena la lista con **↑ Subir** / **↓ Bajar**.
 4. Pulsa **Unir documentos**, elige la ruta de salida y espera el indicador de progreso.
+
+### Excel → Word
+1. Ve a la pestaña **📊 Excel → Word**.
+2. Pulsa **Examinar** para seleccionar el archivo Excel (`.xlsx` / `.xls`).
+3. Selecciona la plantilla `.docx` para los documentos.
+4. Indica la carpeta de salida donde se guardarán los documentos.
+5. Pulsa **Generar Documentos** y espera el indicador de progreso.
+
+> Cada fila del Excel genera un documento `documento_N.docx` en la carpeta de salida. Las columnas del Excel deben coincidir con las variables de la plantilla (`{{ columna }}`).
 
 ---
 
