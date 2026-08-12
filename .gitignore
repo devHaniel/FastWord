@@ -3,6 +3,10 @@
 venv/
 env/
 
+# pruebas salida
+output/
+plantillas/
+
 # Python
 __pycache__/
 *.py[cod]
